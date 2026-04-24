@@ -66,7 +66,7 @@ jobs:
     name: Release All
     runs-on: ubuntu-latest
     if: ${{ always() }}
-    needs: [codecc, preci-server, preci-jetbrains-plugin]
+    needs: [preci-server, preci-jetbrains-plugin]
     steps:
       - name: Create Release
         id: create_release
@@ -78,21 +78,6 @@ jobs:
           release_name: bk-codecc ${{ github.ref }}
           draft: true
           prerelease: true
-      ## codecc
-      - name: download codecc
-        uses: actions/download-artifact@v4
-        with:
-          name: codecc
-          path: ./
-      - name: Upload Release Asset -- CODECC
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./bkcodecc-slim.tar.gz
-          asset_name: bkcodecc-slim.tar.gz
-          asset_content_type: application/gzip
       ## preci-server
       - name: download preci-server
         uses: actions/download-artifact@v4
