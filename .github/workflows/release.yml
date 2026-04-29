@@ -132,7 +132,7 @@ jobs:
     name: Release All
     runs-on: ubuntu-latest
     if: ${{ always() }}
-    needs: [codecc, preci-server, preci-jetbrains-plugin]
+    needs: [preci-server, preci-jetbrains-plugin]
     steps:
       - name: Create Release
         id: create_release
